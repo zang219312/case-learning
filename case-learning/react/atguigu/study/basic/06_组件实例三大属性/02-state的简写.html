@@ -16,20 +16,15 @@
 
   <script type="text/babel">
     class Weather extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          isHot: true,
-          wind: '微风'
-        }
-        // 解决 changeWeather 中this指向的问题
-        this.changeWeather = this.changeWeather.bind(this)
+      state = {
+        isHot: true,
+        wind: '微风'
       }
       render () {
         return <h1 onClick={this.changeWeather}>今天天气{this.state.isHot ? '炎热' : '不错'}，{this.state.wind}</h1>
       }
 
-      changeWeather (e) {
+      changeWeather = (e) => {
         // 放在 Weather 的原型对象上，供实例调用
         const { isHot } = this.state
         // 状态不可直接更改，且更新是合并
