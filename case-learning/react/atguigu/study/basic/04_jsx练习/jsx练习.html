@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+
+
+  <script type="text/babel">
+    const data = ['angular', 'react', 'vue']
+    const liNodes = data.map((v, index) => (
+      <li key={index}>{v}</li>
+    ))
+    const V_DOM = (
+      <div>
+        <h1>前端</h1>
+        <ul>
+          {liNodes}
+        </ul>
+      </div>
+    )
+
+    ReactDOM.render(V_DOM, document.getElementById('app'))
+
+
+  </script>
+</body>
+
+</html>
