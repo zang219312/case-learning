@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生命周期（新）</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+  <script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+  <script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+  <script type="text/javascript" src="../js/17.0.1/prop-types.js"></script>
+
+  <script type="text/babel">
+    class Counter extends React.Component {
+      constructor(props) {
+        console.log('Count---constructor');
+        super(props)
+        this.state = {
+          count: 0
+        }
+      }
+
+      force = () => {
+        this.forceUpdate()
+      }
+
+      kill = () => {
+        ReactDOM.unmountComponentAtNode(document.getElementById('app'))
+      }
+
+
+      increment = () => {
+        const { count } = this.state
+        this.setState({ count: count + 1 })
+      }
+
+      // 若 state 的值在任何时候都取决于 props
+      static getDerivedStateFromProps (props, state) {
+        console.log('getDerivedStateFromProps', props, state);
+        return null
+      }
+
+      getSnapshotBeforeUpdate () {
+        console.log('getSnapshotBeforeUpdate');
+        return 'name'
+      }
+
+      // 组件挂载完毕
+      componentDidMount () {
+        console.log('component Did Mount');
+
+      }
+
+      // 组件即将卸载
+      componentWillUnmount () {
+        console.log('componentWillUnmount');
+      }
+
+      // 控制组件更新的阀门
+      shouldComponentUpdate () {
+        console.log('shouldComponentUpdate')
+
+        return true
+      }
+
+      // 组件更新完成
+      componentDidUpdate (preProps, preState, snapshotValue) {
+        console.log('componentDidUpdate', preProps, preState, snapshotValue);
+
+      }
+
+      // 初始化渲染、状态更新之后
+      render () {
+        console.log('render');
+        return (
+          <div>
+            <h2>当前的和为:{this.state.count}</h2>
+            <button onClick={this.increment}>Increment</button>
+            <button onClick={this.kill}>卸载组件</button>
+            <button onClick={this.force}>强制更新</button>
+          </div>
+        )
+      }
+    }
+
+
+    ReactDOM.render(<Counter count={1110} />, document.getElementById('app'))
+
+  </script>
+</body>
+
+</html>
