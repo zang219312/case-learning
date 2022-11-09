@@ -16,7 +16,7 @@ export const ProjectListScreen = () => {
   })
   const [list, setList] = useState([])
 
-  const debouncedParam = useDebounce(param, 3000)
+  const debouncedParam = useDebounce(param, 500)
 
   useEffect(() => {
     console.log('param change')
